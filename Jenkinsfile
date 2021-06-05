@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'jdk_11.0.11'
+      }
+
     environment {
     SERVICE_NAME = "licensing-boot"
     ORGANIZATION_NAME = "learning-k8s-sboot"
