@@ -22,7 +22,6 @@ pipeline {
         stage('Build'){
             steps{
                 sh 'java -version'
-                sh 'docker version'
                 sh '''mvn clean package -DskipTests'''
             }
         }
