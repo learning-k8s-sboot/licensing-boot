@@ -27,7 +27,9 @@ pipeline {
         }
         stage('Build and Push Image'){
             agent {
-                label 'dockerfile'
+                docker {
+                    label 'dockerfile'
+                }
             }
             steps{
                 sh 'docker build -t ${REPOSITORY_TAG} .'
