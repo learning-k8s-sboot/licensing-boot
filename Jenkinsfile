@@ -20,13 +20,15 @@ pipeline {
             }
         }
         stage('Build'){
-            agent { dockerfile true }
             steps{
                 sh 'java -version'
                 sh '''mvn clean package -DskipTests'''
             }
         }
         stage('Build and Push Image'){
+            agent {
+                label 'dockerfile'
+            }
             steps{
                 sh 'docker build -t ${REPOSITORY_TAG} .'
                 sh 'docker push ${REPOSITORY_TAG}'
