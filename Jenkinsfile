@@ -17,6 +17,7 @@ pipeline {
             steps{
                 sh 'java -version'
                 sh 'find / -name java '
+                sh 'ls /usr/lib/jvm/'
                 sh '''mvn clean package'''
             }
         }
