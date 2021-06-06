@@ -3,7 +3,6 @@ pipeline {
 
     tools {
         jdk 'java_11'
-        docker 'docker'
     }
 
     environment {
