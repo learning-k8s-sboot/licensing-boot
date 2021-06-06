@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'java_11'
+    }
+
     environment {
     SERVICE_NAME = "licensing-boot"
     ORGANIZATION_NAME = "learning-k8s-sboot"
@@ -17,7 +21,6 @@ pipeline {
             steps{
                 sh 'java -version'
                 sh 'find / -name java '
-                sh 'update-alternatives --display java'
                 sh '''mvn clean package'''
             }
         }
