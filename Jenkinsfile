@@ -28,7 +28,7 @@ pipeline {
         stage('Build and Push Image'){
             agent {
                 docker {
-                    label 'dockerfile'
+                    label 'dockerserver'
                 }
             }
             steps{
