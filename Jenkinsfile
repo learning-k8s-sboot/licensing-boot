@@ -20,6 +20,7 @@ pipeline {
             }
         }
         stage('Build'){
+            agent { dockerfile true }
             steps{
                 sh 'java -version'
                 sh '''mvn clean package -DskipTests'''
