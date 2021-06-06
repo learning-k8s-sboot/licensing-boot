@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { dockerfile true }
 
     tools {
         jdk 'java_11'
@@ -26,7 +26,6 @@ pipeline {
             }
         }
         stage('Build and Push Image'){
-            agent { label 'dockerserver' }
             steps{
                 sh 'docker build -t ${REPOSITORY_TAG} .'
                 sh 'docker push ${REPOSITORY_TAG}'
