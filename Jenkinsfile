@@ -17,7 +17,7 @@ pipeline {
             steps{
                 sh 'java -version'
                 sh 'find / -name java '
-                sh 'update-java-alternatives -l'
+                sh 'update-alternatives --display java'
                 sh '''mvn clean package'''
             }
         }
