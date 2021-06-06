@@ -8,6 +8,8 @@ pipeline {
     environment {
     SERVICE_NAME = "licensing-boot"
     ORGANIZATION_NAME = "learning-k8s-sboot"
+    DOCKERHUB_USERNAME = "vnedbaliuk"
+    REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}:${BUILD_ID}"
     }
 
     stages{
@@ -20,8 +22,13 @@ pipeline {
         stage('Build'){
             steps{
                 sh 'java -version'
-                sh 'find / -name java '
-                sh '''mvn clean package'''
+                sh '''mvn clean package -DskipTests'''
+            }
+        }
+        stage('Build and Push Image'){
+            steps{
+                sh 'docker image build -t ${REPOSITORY_TAG}'
+                sh 'docker push ${REPOSITORY_TAG}'
             }
         }
     }
