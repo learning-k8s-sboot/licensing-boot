@@ -1,9 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'java_11'
-    }
 
     environment {
     SERVICE_NAME = "licensing-boot"
