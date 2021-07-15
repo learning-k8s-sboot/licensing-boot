@@ -52,7 +52,7 @@ jobs:
         path: results.json
     - name: Convert pipeline scan output to SARIF format
       id: convert
-      uses: Veracode/veracode-pipeline-scan-results-to-sarif@v0.1.5
+      uses: ./
       with:
         pipeline-results-json: results.json
         output-results-sarif: veracode-results.sarif
