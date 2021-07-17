@@ -1,10 +1,10 @@
-FROM amazoncorretto:11.0.11-alpine as builder
+FROM openjdk:11.0.11-jre as builder
 WORKDIR application
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
-FROM amazoncorretto:11.0.11-alpine
+FROM openjdk:11.0.11-jre
 WORKDIR application
 COPY --from=builder application/dependencies/ ./
 COPY --from=builder application/snapshot-dependencies/ ./
