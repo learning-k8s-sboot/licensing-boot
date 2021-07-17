@@ -24,7 +24,6 @@ pipeline {
         }
         stage('Build and Push Image'){
             steps{
-                sh 'sudo chmod 666 /var/run/docker.sock'
                 sh 'docker build -t ${REPOSITORY_TAG} .'
                 sh 'docker push ${REPOSITORY_TAG}'
             }
