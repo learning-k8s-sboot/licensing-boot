@@ -7,6 +7,7 @@ pipeline {
     ORGANIZATION_NAME = "learning-k8s-sboot"
     DOCKERHUB_USERNAME = "vnedbaliuk"
     REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}:${BUILD_ID}"
+    DOCKER_IMAGE = ''
     }
 
     stages{
@@ -24,16 +25,17 @@ pipeline {
         }
         stage('Build Image'){
             steps{
-                sh 'docker build -t ${REPOSITORY_TAG} .'
+                script{
+                    DOCKER_IMAGE = docker.build REPOSITORY_TAG
+                }
             }
         }
         stage('Deploy Image'){
             steps{
                 script{
-                    docker.withRegistry( '', registryCredential ) {
-                        def customImage = ${REPOSITORY_TAG}
-                        customImage.push()
-                      }
+                    docker.withRegistry( '', credentialsId: 'DockerHub' ) {
+                        DOCKER_IMAGE.push()
+                    }
                 }
             }
         }
