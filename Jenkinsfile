@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy Image'){
             steps{
                 script{
-                    docker.withRegistry( '', credentialsId: 'DockerHub' ) {
+                    docker.withRegistry( '', 'DockerHub' ) {
                         DOCKER_IMAGE.push()
                     }
                 }
