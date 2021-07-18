@@ -28,12 +28,12 @@ pipeline {
             }
         }
         stage('Deploy Image'){
-            node {
-                checkout scm
-                docker.withRegistry('', 'credentials-id') {
-                    def customImage = ${REPOSITORY_TAG}
-                    /* Push the container to the custom Registry */
-                    customImage.push()
+            steps{
+                script{
+                    docker.withRegistry( '', registryCredential ) {
+                        def customImage = ${REPOSITORY_TAG}
+                        customImage.push()
+                      }
                 }
             }
         }
