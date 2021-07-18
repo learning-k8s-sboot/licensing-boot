@@ -22,10 +22,19 @@ pipeline {
                 sh '''mvn clean package -DskipTests'''
             }
         }
-        stage('Build and Push Image'){
+        stage('Build Image'){
             steps{
                 sh 'docker build -t ${REPOSITORY_TAG} .'
-                sh 'docker push ${REPOSITORY_TAG}'
+            }
+        }
+        stage('Deploy Image'){
+            node {
+                checkout scm
+                docker.withRegistry('', 'credentials-id') {
+                    def customImage = ${REPOSITORY_TAG}
+                    /* Push the container to the custom Registry */
+                    customImage.push()
+                }
             }
         }
     }
