@@ -1,7 +1,6 @@
 pipeline {
     agent any
 
-
     environment {
     SERVICE_NAME = "licensing-boot"
     ORGANIZATION_NAME = "learning-k8s-sboot"
