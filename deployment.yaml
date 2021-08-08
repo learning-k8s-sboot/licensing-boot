@@ -21,6 +21,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: learning-k8s-sboot-licensing-boot
+  namespace: dev
 
 spec:
   # This defines which pods are going to be represented by this Service
@@ -31,7 +32,7 @@ spec:
 
   ports:
     - name: http
-      port: 8080
+      port: 80
       nodePort: 30020
 
   type: NodePort
