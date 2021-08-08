@@ -40,8 +40,8 @@ pipeline {
         }
         stage('Deploy to Cluster') {
             steps {
-                script{
-                    kubernetesDeploy(kubeconfigId: 'kubernetes', configs: '${WORKSPACE}/deployment.yaml')
+            withKubeConfig([credentialsId: 'kubernetes']) {
+                  sh 'envsubst < ${WORKSPACE}/deploy.yaml | microk8s.kubectl apply -f -'
                 }
             }
         }
