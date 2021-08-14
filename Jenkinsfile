@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script{
                     withKubeConfig([credentialsId: 'microk8s', serverUrl: 'https://192.168.0.11:16443']) {
-                        sh 'envsubst < ${WORKSPACE}/deploy.yaml | microk8s.kubectl apply -f -'
+                        sh 'microk8s kubectl get pods -n dev'
                     }
                 }
             }
