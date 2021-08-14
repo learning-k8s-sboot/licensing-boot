@@ -40,7 +40,7 @@ pipeline {
         }
         stage('Deploy to Cluster') {
             steps {
-            withKubeConfig([credentialsId: 'kubernetes']) {
+            withKubeConfig([credentialsId: 'microk8s', serverUrl: 'https://192.168.0.11:16443']) {
                   sh 'envsubst < ${WORKSPACE}/deploy.yaml | microk8s.kubectl apply -f -'
                 }
             }
