@@ -40,7 +40,7 @@ pipeline {
         }
         stage('Deploy to Cluster') {
             steps {
-                sh 'envsubst < ${WORKSPACE}/deploy.yaml | microk8s.kubectl apply -f -'
+                sh 'envsubst < ${WORKSPACE}/deployment.yaml | microk8s.kubectl apply -f -'
             }
         }
     }
