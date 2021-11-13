@@ -18,8 +18,19 @@ pipeline {
         }
         stage('Build'){
             steps{
-                sh 'java -version'
                 sh '''mvn clean package -DskipTests'''
+            }
+        }
+        stage('Unit Tests'){
+            steps{
+                sh '''mvn test'''
+            }
+        }
+        stage('Sonar'){
+            steps{
+                withSonarQubeEnv(installationName: 'sonar-learning'){
+                    sh '''mvn sonar:sonar'''
+                }
             }
         }
         stage('Build Image'){
