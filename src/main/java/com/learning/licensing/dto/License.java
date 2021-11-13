@@ -47,28 +47,12 @@ public class License {
         licenseType = builder.licenseType;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getOrganizationId() {
-        return organizationId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public String getLicenseType() {
-        return licenseType;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        License license = (License) o;
+        var license = (License) o;
 
         if (!id.equals(license.id)) return false;
         if (!Objects.equals(organizationId, license.organizationId))
