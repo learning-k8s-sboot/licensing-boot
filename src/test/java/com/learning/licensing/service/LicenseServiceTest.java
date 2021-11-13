@@ -22,7 +22,7 @@ class LicenseServiceTest {
 
         //when
         final License actualResult = licenseService.getLicense("123");
-        
+
         //then
         assertEquals(expectedLicense, actualResult);
 
