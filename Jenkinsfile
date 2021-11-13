@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Install'){
             steps{
-                sh '''mvn clean install -DskipTests'''
+                sh '''mvn clean install'''
             }
         }
         stage('Sonar'){
