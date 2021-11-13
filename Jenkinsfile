@@ -16,14 +16,9 @@ pipeline {
                 git branch: 'develop', credentialsId: 'GitHub', url: "https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}/"
             }
         }
-        stage('Build'){
+        stage('Install'){
             steps{
-                sh '''mvn clean package -DskipTests'''
-            }
-        }
-        stage('Unit Tests'){
-            steps{
-                sh '''mvn test'''
+                sh '''mvn clean install -DskipTests'''
             }
         }
         stage('Sonar'){
