@@ -1,4 +1,6 @@
-package com.learning.licensing.model;
+package com.learning.licensing.dto;
+
+import java.util.Objects;
 
 public class License {
     private final String id;
@@ -59,5 +61,28 @@ public class License {
 
     public String getLicenseType() {
         return licenseType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        License license = (License) o;
+
+        if (!id.equals(license.id)) return false;
+        if (!Objects.equals(organizationId, license.organizationId))
+            return false;
+        if (!Objects.equals(productName, license.productName)) return false;
+        return Objects.equals(licenseType, license.licenseType);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + (organizationId != null ? organizationId.hashCode() : 0);
+        result = 31 * result + (productName != null ? productName.hashCode() : 0);
+        result = 31 * result + (licenseType != null ? licenseType.hashCode() : 0);
+        return result;
     }
 }
