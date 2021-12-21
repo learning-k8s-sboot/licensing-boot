@@ -1,6 +1,6 @@
 package com.learning.licensing.controller;
 
-import com.learning.licensing.dto.License;
+import com.learning.licensing.dto.LicenseDto;
 import com.learning.licensing.service.LicenseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class LicenseController {
     }
 
     @GetMapping(value = "/{licenseId}")
-    public ResponseEntity<License> getLicenses(@PathVariable("licenseId") String licenseId) {
+    public ResponseEntity<LicenseDto> getLicenses(@PathVariable("licenseId") String licenseId) {
         return ResponseEntity.ok(licenseService.getLicense(licenseId));
     }
 }
