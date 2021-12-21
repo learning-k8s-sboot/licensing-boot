@@ -13,13 +13,19 @@ pipeline {
         stage('Preparation'){
             steps{
                 cleanWs()
-                git credentialsId: 'GitHub', url: "https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}/"
+                git branch: 'develop', credentialsId: 'GitHub', url: "https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}/"
             }
         }
-        stage('Build'){
+        stage('Install'){
             steps{
-                sh 'java -version'
-                sh '''mvn clean package -DskipTests'''
+                sh '''mvn clean install'''
+            }
+        }
+        stage('Sonar'){
+            steps{
+                withSonarQubeEnv(installationName: 'sonar-learning'){
+                    sh '''mvn sonar:sonar'''
+                }
             }
         }
         stage('Build Image'){
@@ -29,13 +35,18 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Image'){
+        stage('Push Image'){
             steps{
                 script{
                     docker.withRegistry( '', 'DockerHub' ) {
                         DOCKER_IMAGE.push()
                     }
                 }
+            }
+        }
+        stage('Deploy to Cluster') {
+            steps {
+                sh 'envsubst < ${WORKSPACE}/deployment.yaml | microk8s.kubectl apply -f -'
             }
         }
     }
