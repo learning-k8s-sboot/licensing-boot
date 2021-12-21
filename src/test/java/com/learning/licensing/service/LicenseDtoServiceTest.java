@@ -1,7 +1,6 @@
 package com.learning.licensing.service;
 
-import com.learning.licensing.dto.License;
-import org.junit.jupiter.api.BeforeEach;
+import com.learning.licensing.dto.LicenseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class LicenseServiceTest {
+class LicenseDtoServiceTest {
 
     @Autowired
     private LicenseService licenseService;
@@ -18,18 +17,18 @@ class LicenseServiceTest {
     @Test
     void shouldGetLicense() {
         //given
-        final License expectedLicense = provideLicense();
+        final LicenseDto expectedLicenseDto = provideLicense();
 
         //when
-        final License actualResult = licenseService.getLicense("123");
+        final LicenseDto actualResult = licenseService.getLicense("123");
 
         //then
-        assertEquals(expectedLicense, actualResult);
+        assertEquals(expectedLicenseDto, actualResult);
 
     }
 
-    private License provideLicense() {
-        return new License.Builder()
+    private LicenseDto provideLicense() {
+        return new LicenseDto.Builder()
                 .organizationId("qwer-1234")
                 .licenseType("Test Product Name")
                 .productName("PerSeat")

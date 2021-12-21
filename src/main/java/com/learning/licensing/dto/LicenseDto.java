@@ -2,7 +2,7 @@ package com.learning.licensing.dto;
 
 import java.util.Objects;
 
-public class License {
+public class LicenseDto {
     private final String id;
     private final String organizationId;
     private final String productName;
@@ -35,12 +35,12 @@ public class License {
             return this;
         }
 
-        public License build() {
-            return new License(this);
+        public LicenseDto build() {
+            return new LicenseDto(this);
         }
     }
 
-    public License(Builder builder) {
+    public LicenseDto(Builder builder) {
         id = builder.id;
         organizationId = builder.organizationId;
         productName = builder.productName;
@@ -52,7 +52,7 @@ public class License {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        var license = (License) o;
+        var license = (LicenseDto) o;
 
         if (!id.equals(license.id)) return false;
         if (!Objects.equals(organizationId, license.organizationId))
