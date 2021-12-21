@@ -5,7 +5,7 @@ pipeline {
     SERVICE_NAME = "licensing-boot"
     ORGANIZATION_NAME = "learning-k8s-sboot"
     DOCKERHUB_USERNAME = "vnedbaliuk"
-    REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}:${BUILD_ID}"
+    REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${SERVICE_NAME}:${BUILD_ID}"
     DOCKER_IMAGE = ''
     }
 
