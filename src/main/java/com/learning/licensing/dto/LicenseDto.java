@@ -40,11 +40,27 @@ public class LicenseDto {
         }
     }
 
-    public LicenseDto(Builder builder) {
+    private LicenseDto(Builder builder) {
         id = builder.id;
         organizationId = builder.organizationId;
         productName = builder.productName;
         licenseType = builder.licenseType;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getOrganizationId() {
+        return organizationId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getLicenseType() {
+        return licenseType;
     }
 
     @Override
