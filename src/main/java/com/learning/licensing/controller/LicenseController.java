@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "v1/organizations/123456789/licenses")
+@RequestMapping(value = "v1/organization/123456789/licenses")
 public class LicenseController {
 
     private final LicenseService licenseService;
