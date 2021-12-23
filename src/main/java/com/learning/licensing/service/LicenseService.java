@@ -5,10 +5,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LicenseService {
-    public LicenseDto getLicense(String licenseId) {
+    private final OrganizationDiscoveryClient organizationDiscoveryClient;
+
+    public LicenseService(final OrganizationDiscoveryClient organizationDiscoveryClient) {
+        this.organizationDiscoveryClient = organizationDiscoveryClient;
+    }
+
+    public LicenseDto getLicense(final String licenseId, final String organisationId) {
         return new LicenseDto.Builder()
                 .id(licenseId)
-                .organizationId("qwer-1234")
+                .organizationId(organizationDiscoveryClient.getOrganization(organisationId).getId())
                 .licenseType("Test Product Name")
                 .productName("PerSeat")
                 .build();
