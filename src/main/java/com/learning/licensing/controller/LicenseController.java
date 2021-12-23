@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "v1/organization/123456789/licenses")
+@RequestMapping(value = "v1/organization/{organisationId}/licenses")
 public class LicenseController {
 
     private final LicenseService licenseService;
@@ -19,7 +19,7 @@ public class LicenseController {
     }
 
     @GetMapping(value = "/{licenseId}")
-    public ResponseEntity<LicenseDto> getLicenses(@PathVariable("licenseId") String licenseId) {
-        return ResponseEntity.ok(licenseService.getLicense(licenseId));
+    public ResponseEntity<LicenseDto> getLicenses(@PathVariable("licenseId") final String licenseId, @PathVariable("organisationId") final String organisationId) {
+        return ResponseEntity.ok(licenseService.getLicense(licenseId, organisationId));
     }
 }
