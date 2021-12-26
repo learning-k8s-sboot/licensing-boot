@@ -31,8 +31,6 @@ spec:
     app: licensing-boot
 
   ports:
-    - name: http
-      port: 8080
-      nodePort: 30020
-
-  type: NodePort
+    - protocol: TCP
+      port: 80
+      targetPort: 9376
