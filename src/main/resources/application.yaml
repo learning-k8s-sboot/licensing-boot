@@ -1,13 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   application:
     name: licensing-boot
-eureka:
-  instance:
-    preferIpAddress: true
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://localhost:8070/eureka/
