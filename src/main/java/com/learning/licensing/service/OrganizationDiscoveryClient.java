@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class OrganizationDiscoveryClient {
-    private static final String ORGANISATION_URL = "http://learning-k8s-sboot-organization-boot:8080/v1/organization/{organizationId}";
+    private static final String ORGANISATION_URL = "http://learning-k8s-sboot-organization-boot:8080/organization-service/v1/organizations/{organizationId}";
 
     private final RestTemplate restTemplate;
 
