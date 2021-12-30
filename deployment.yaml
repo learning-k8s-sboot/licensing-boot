@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: licensing-boot
-  replicas: 2
+  replicas: 1
   template: # template for the pods
     metadata:
       labels:
@@ -33,6 +33,5 @@ spec:
   ports:
     - name: http
       port: 8080
-      nodePort: 30020
 
-  type: NodePort
+  type: ClusterIP
