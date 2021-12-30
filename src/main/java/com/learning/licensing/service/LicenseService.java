@@ -11,10 +11,19 @@ public class LicenseService {
         this.organizationDiscoveryClient = organizationDiscoveryClient;
     }
 
+//    public LicenseDto getLicense(final String licenseId, final String organisationId) {
+//        return new LicenseDto.Builder()
+//                .id(licenseId)
+//                .organizationId(organizationDiscoveryClient.getOrganization(organisationId).getId())
+//                .licenseType("Test Product Name")
+//                .productName("PerSeat")
+//                .build();
+//    }
+
     public LicenseDto getLicense(final String licenseId, final String organisationId) {
         return new LicenseDto.Builder()
                 .id(licenseId)
-                .organizationId(organizationDiscoveryClient.getOrganization(organisationId).getId())
+                .organizationId(organisationId)
                 .licenseType("Test Product Name")
                 .productName("PerSeat")
                 .build();
