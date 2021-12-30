@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: licensing-boot
+  name: licensing-service
   namespace: dev
 spec:
   selector:
     matchLabels:
-      app: licensing-boot
+      app: licensing-service
   replicas: 1
   template: # template for the pods
     metadata:
       labels:
-        app: licensing-boot
+        app: licensing-service
     spec:
       containers:
-        - name: licensing-boot
+        - name: licensing-service
           image: ${REPOSITORY_TAG}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: learning-k8s-sboot-licensing-boot
+  name: learning-k8s-sboot-licensing-service
   namespace: dev
 
 spec:
@@ -28,7 +28,7 @@ spec:
   # The service becomes a network endpoint for either other services
   # or maybe external users to connect to (eg browser)
   selector:
-    app: licensing-boot
+    app: licensing-service
 
   ports:
     - name: http
