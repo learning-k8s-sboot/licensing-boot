@@ -27,7 +27,7 @@ class LicenseDtoServiceTest {
     @Test
     void shouldGetLicense() {
         //given
-        Mockito.when(organizationDiscoveryClient.getOrganization(Mockito.anyString())).thenReturn(provideOrganization());
+//        Mockito.when(organizationDiscoveryClient.getOrganization(Mockito.anyString())).thenReturn(provideOrganization());
 
         //when
         final LicenseDto actualResult = licenseService.getLicense("123", "987");
