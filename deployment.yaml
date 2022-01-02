@@ -7,15 +7,17 @@ spec:
   selector:
     matchLabels:
       app: licensing-service
-  replicas: 1
+  replicas: 2
   template: # template for the pods
     metadata:
       labels:
         app: licensing-service
     spec:
       containers:
-        - name: licensing-service
-          image: ${REPOSITORY_TAG}
+      - name: licensing-service
+        image: ${REPOSITORY_TAG}
+      nodeSelector:
+        cputype: arm
 ---
 apiVersion: v1
 kind: Service
