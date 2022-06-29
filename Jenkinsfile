@@ -6,7 +6,6 @@ pipeline {
         SERVICE_NAME = "licensing-boot"
         ORGANIZATION_NAME = "learning-k8s-sboot"
         DOCKER_USER_NAME = credentials('DOCKER_USER_NAME')
-        DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
         REPOSITORY_TAG = "${DOCKER_USER_NAME}/${SERVICE_NAME}:${BUILD_ID}"
         DOCKER_IMAGE = ''
     }
@@ -35,7 +34,6 @@ pipeline {
                 echo 'Initializing..'
                 echo "Running ${BUILD_ID} on ${JENKINS_URL}"
                 echo "Current branch: ${BRANCH_NAME}"
-                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER_NAME --password-stdin'
             }
         }
         stage('Build Image') {
