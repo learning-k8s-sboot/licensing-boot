@@ -1,12 +1,14 @@
 pipeline {
+
     agent any
 
     environment {
-    SERVICE_NAME = "licensing-boot"
-    ORGANIZATION_NAME = "learning-k8s-sboot"
-    DOCKERHUB_USERNAME = "vnedbaliuk"
-    REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${SERVICE_NAME}:${BUILD_ID}"
-    DOCKER_IMAGE = ''
+        SERVICE_NAME = "licensing-boot"
+        ORGANIZATION_NAME = "learning-k8s-sboot"
+        DOCKER_USER_NAME = credentials('DOCKER_USER_NAME')
+        DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+        REPOSITORY_TAG = "${DOCKER_USER_NAME}/${SERVICE_NAME}:${BUILD_ID}"
+        DOCKER_IMAGE = ''
     }
 
     stages{
@@ -18,7 +20,7 @@ pipeline {
         }
         stage('Install'){
             steps{
-                sh '''mvn clean install'''
+                sh '''mvn clean package'''
             }
         }
         stage('Sonar'){
@@ -28,15 +30,25 @@ pipeline {
                 }
             }
         }
-        stage('Build Image'){
-            steps{
+        stage('Init') {
+            steps {
+                echo 'Initializing..'
+                echo "Running ${BUILD_ID} on ${JENKINS_URL}"
+                echo "Current branch: ${BRANCH_NAME}"
+                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER_NAME --password-stdin'
+            }
+        }
+        stage('Build Image') {
+            steps {
+                echo 'Building image..'
                 script{
                     DOCKER_IMAGE = docker.build REPOSITORY_TAG
                 }
             }
         }
-        stage('Push Image'){
-            steps{
+        stage('Push Image') {
+            steps {
+                echo 'Publishing image to DockerHub..'
                 script{
                     docker.withRegistry( '', 'DockerHub' ) {
                         DOCKER_IMAGE.push()
@@ -46,7 +58,7 @@ pipeline {
         }
         stage('Deploy to Cluster') {
             steps {
-                sh 'envsubst < ${WORKSPACE}/deployment.yaml | microk8s.kubectl apply -f -'
+                sh 'envsubst < ${WORKSPACE}/deployment.yaml | kubectl apply -f -'
             }
         }
     }
